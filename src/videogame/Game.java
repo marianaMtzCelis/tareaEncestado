@@ -116,8 +116,12 @@ public class Game implements Runnable {
         monster = new Target(getWidth()-250, getHeight()/2-100,200,200,this);
         cookie = new Player(10, getHeight()/2, 1, 100, 100, this);
         display.getJframe().addKeyListener(keyManager);
+        
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
+        
         this.score = 0;
         this.vidas = 5;
         this.falladas = 0;

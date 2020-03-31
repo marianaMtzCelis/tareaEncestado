@@ -20,7 +20,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
     private int y;              // to get y position of the mouse
     
     public MouseManager() {
-        
+    
     }
 
     @Override
