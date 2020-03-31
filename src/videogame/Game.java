@@ -11,17 +11,9 @@ import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
 
 /**
- *  RUBRICA
- *  20 FALTA Documentacion n shit
- *  10 YA Sonidos
- *  10 IDK Creatividad
- *  10 YA Aniamciones
- *  40 FALTA Tiro Parabolico
- *  5 YA Score
- *  5 YA Vidas
+ * RUBRICA 20 FALTA Documentacion n shit 10 YA Sonidos 10 IDK Creatividad 10 YA
+ * Aniamciones 40 FALTA Tiro Parabolico 5 YA Score 5 YA Vidas
  */
-
-
 /**
  *
  * @author antoniomejorado
@@ -43,7 +35,6 @@ public class Game implements Runnable {
     private int score;              // to keep track of score
     private int vidas;              // to keep track of player's lives
     private int falladas;           // to keep track of consecutive failed attempts
-   
 
     /**
      * to create title, width and height and set the game is still not running
@@ -78,17 +69,19 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
-    
+
     /**
      * To get the keymanager from game
+     *
      * @return keymanager
      */
     public KeyManager getKeyManager() {
         return keyManager;
-    } 
-    
+    }
+
     /**
      * To get the Mouse Manager from game
+     *
      * @return mouseManager
      */
     public MouseManager getMouseManager() {
@@ -103,7 +96,7 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return cookie;
     }
-    
+
     public Target getTarget() {
         return monster;
     }
@@ -114,19 +107,19 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        monster = new Target(getWidth()-250, getHeight()/2-100,200,200,this);
-        cookie = new Player(10, getHeight()/2, 1, 100, 100, this);
+        monster = new Target(getWidth() - 250, getHeight() / 2 - 100, 200, 200, this);
+        cookie = new Player(10, getHeight() / 2, 1, 100, 100, this);
         display.getJframe().addKeyListener(keyManager);
-        
+
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-        
+
         this.score = 0;
         this.vidas = 5;
         this.falladas = 0;
-        
+
     }
 
     @Override
@@ -161,30 +154,30 @@ public class Game implements Runnable {
     }
 
     private void tick() {
-        
+
         if (vidas > 0) {
-        keyManager.tick();
-        cookie.tick();
-        monster.tick();
-        
-        if (cookie.colision(monster)) {
-            score += 10;
-            if (score%50 == 0) {
-                vidas++;
+            keyManager.tick();
+            cookie.tick();
+            monster.tick();
+
+            if (cookie.colision(monster)) {
+                score += 10;
+                if (score % 50 == 0) {
+                    vidas++;
+                }
+                Assets.bite.play();
+                cookie.setX(10);
+            } else if (cookie.getX() > getWidth() - 250) {
+                if (falladas < 2) {
+                    falladas++;
+                } else if (falladas == 2) {
+                    vidas--;
+                    falladas = 0;
+                }
+                Assets.missed.play();
+                cookie.setX(10);
             }
-            Assets.bite.play();
-            cookie.setX(10);
-        } else if (cookie.getX() > getWidth()-250) {
-            if (falladas < 2) {
-                falladas++;
-            } else if (falladas == 2) {
-                vidas--;
-                falladas = 0;
-            }
-            Assets.missed.play();
-            cookie.setX(10);
-        }
-        
+
         }
     }
 
@@ -204,18 +197,18 @@ public class Game implements Runnable {
             g.drawImage(Assets.background, 0, 0, width, height, null);
             monster.render(g);
             cookie.render(g);
-            
+
             // displays vidas and score
-            g.setColor(Color.black);
+            g.setColor(Color.white);
             g.drawString("Falladas: " + falladas, 80, 80);
             g.drawString("Vidas:" + vidas, 80, 100);
             g.drawString("Score: " + score, 80, 120);
-            
+
             // Displays game over if vidas reaches to 0
             if (vidas <= 0) {
                 g.drawImage(Assets.gameOver, 0, 0, width, height, null);
             }
-            
+
             bs.show();
             g.dispose();
         }
