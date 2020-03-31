@@ -85,10 +85,10 @@ public class Player extends Item {
     public void tick() {
         
         
-        if (game.getMouseManager().isIzquierdo()) {
+//        if (game.getMouseManager().isIzquierdo()) {
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
-        }
+//        }
         
          
         if (game.getKeyManager().up) {
