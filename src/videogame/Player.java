@@ -137,6 +137,7 @@ public class Player extends Item {
               setY((int)(yo + (vo*0.851*t) - (0.5*-9.81*t*t)));
               t = (new Date().getTime() - time.getTime()) / 1000.0 ;
               System.out.println(t);
+              this.cookieAnimation.tick();
               
          
         }
