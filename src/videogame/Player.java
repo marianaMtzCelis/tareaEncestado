@@ -81,6 +81,12 @@ public class Player extends Item {
         this.height = height;
     }
 
+    public void setX(int x){
+        if (x <= 100){
+            this.x = x;
+        }
+    }
+    
     @Override
     public void tick() {
         
@@ -89,7 +95,6 @@ public class Player extends Item {
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
 //        }
-        
          
         if (game.getKeyManager().up) {
             // updating animation
