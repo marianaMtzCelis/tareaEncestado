@@ -145,7 +145,7 @@ public class Player extends Item {
                 //System.out.println(vo);
             } 
         } else {
-            for (int i = 0; i <= 20; ++i){
+            for (int i = 0; i <= 1000; ++i){
                 setX(xo + (int)(vo*0.5253*t));
                 setY(yo - ((int)((vo*0.851*t) - (4.91*t*t))));
                 t = (new Date().getTime() - time.getTime()) / 1000.0 ;
