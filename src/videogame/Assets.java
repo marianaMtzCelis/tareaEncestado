@@ -30,7 +30,7 @@ public class Assets {
      * initializing the images of the game
      */
     public static void init() {
-        background = ImageLoader.loadImage("/images/background.jpg");
+        background = ImageLoader.loadImage("/images/Background.jpg");
 
         // Getting the sprites from the picture
         sprites = ImageLoader.loadImage("/images/cookieMonster.png");
