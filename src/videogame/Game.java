@@ -28,10 +28,10 @@ public class Game implements Runnable {
     private int height;             // height of the window
     private Thread thread;          // thread to create the game
     private boolean running;        // to set the game
-    private Player cookie;          // to use a cookie
+    private Player player_cookie;          // to use a player_cookie
     private KeyManager keyManager;  // to manage the keyboard
     private MouseManager mouseManager; // to manage the mouse
-    private Target monster;         // to use the cookie monster
+    private Target target_monster;         // to use the player_cookie target_monster
     private int score;              // to keep track of score
     private int vidas;              // to keep track of player's lives
     private int falladas;           // to keep track of consecutive failed attempts
@@ -89,16 +89,16 @@ public class Game implements Runnable {
     }
 
     /**
-     * To get the cookie of the game
+     * To get the player_cookie of the game
      *
-     * @return cookie
+     * @return player_cookie
      */
     public Player getPlayer() {
-        return cookie;
+        return player_cookie;
     }
 
     public Target getTarget() {
-        return monster;
+        return target_monster;
     }
 
     /**
@@ -107,8 +107,8 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        monster = new Target(getWidth() - 250, getHeight() / 2 - 100, 200, 200, this);
-        cookie = new Player(10, getHeight() / 2, 1, 100, 100, this);
+        target_monster = new Target(getWidth() - 250, getHeight() / 2 - 100, 200, 200, this);
+        player_cookie = new Player(10, getHeight() / 2, 1, 100, 100, this);
         display.getJframe().addKeyListener(keyManager);
 
         display.getJframe().addMouseListener(mouseManager);
@@ -157,17 +157,17 @@ public class Game implements Runnable {
 
         if (vidas > 0) {
             keyManager.tick();
-            cookie.tick();
-            monster.tick();
+            player_cookie.tick();
+            target_monster.tick();
 
-            if (cookie.colision(monster)) {
+            if (player_cookie.colision(target_monster)) {
                 score += 10;
                 if (score % 50 == 0) {
                     vidas++;
                 }
                 Assets.bite.play();
-                cookie.setX(10);
-            } else if (cookie.getX() > getWidth() - 250) {
+                player_cookie.setX(10);
+            } else if (player_cookie.getX() > getWidth() - 250) {
                 if (falladas < 2) {
                     falladas++;
                 } else if (falladas == 2) {
@@ -175,7 +175,7 @@ public class Game implements Runnable {
                     falladas = 0;
                 }
                 Assets.missed.play();
-                cookie.setX(10);
+                player_cookie.setX(10);
             }
 
         }
@@ -195,8 +195,9 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
-            monster.render(g);
-            cookie.render(g);
+            g.drawImage(Assets.rectangle,0,0,175,height,null);
+            target_monster.render(g);
+            player_cookie.render(g);
 
             // displays vidas and score
             g.setColor(Color.white);
