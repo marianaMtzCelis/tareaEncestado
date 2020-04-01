@@ -17,7 +17,7 @@ public class Player extends Item {
     private int direction;
     private Game game;
     private Animation cookieAnimation; // stores the animation of player going up
-    private int vo, yo;
+    private int vo, yo, xo;
     private boolean isThrown;
     private double t;
     private static Date time = new Date();
@@ -90,7 +90,7 @@ public class Player extends Item {
     }
 
     public void setX(int x){
-        if (x <= 100 && x >= 0 && !isThrown){
+        if (x <= 150 && x >= 0 && !isThrown){
             this.x = x;
         } else if (isThrown) {
             this.x = x;
@@ -140,23 +140,19 @@ public class Player extends Item {
             setY(game.getMouseManager().getY());
            
             if (!game.getMouseManager().isIzquierdo()) {
-            System.out.println("hola");
-            isThrown = true;
-            vo = this.getX() + 100;
-            yo = this.y;
-            //System.out.println(vo);
+                System.out.println("hola");
+                isThrown = true;
+                vo = this.getX() + 50;
+                xo = this.getX();
+                yo = this.getY();
+                //System.out.println(vo);
             } 
-            
-            
         } else {
-
-              setX((int)(vo*0.5253*t));
-              setY((int)(yo + (vo*0.851*t) - (0.5*-9.81*t*t)));
+              setX(xo + (int)(vo*0.5253*t));
+              setY(yo - ((int)((vo*0.851*t) - (4.91*t*t))));
               t = (new Date().getTime() - time.getTime()) / 1000.0 ;
               System.out.println(t);
               this.cookieAnimation.tick();
-              
-         
         }
 
   
