@@ -168,7 +168,7 @@ public class Game implements Runnable {
                 }
                 Assets.bite.play();
                 player_cookie.setX(10);
-                player_cookie.setY(height/2);
+                player_cookie.setY(getHeight()/2);
                 player_cookie.setIsThrown(false);
                 mouseManager.setIzquierdo(true);
                 //player_cookie.setT(new Date().getTime() - player_cookie.getTime().getTime() / 1000.0);
