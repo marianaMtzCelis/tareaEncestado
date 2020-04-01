@@ -142,7 +142,7 @@ public class Player extends Item {
             if (!game.getMouseManager().isIzquierdo()) {
             System.out.println("hola");
             isThrown = true;
-            vo = this.getX();
+            vo = this.getX() + 100;
             yo = this.y;
             //System.out.println(vo);
             } 
