@@ -134,13 +134,10 @@ public class Player extends Item {
     
     @Override
     public void tick() {
-       
         if (!isThrown) {
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
-           
             if (!game.getMouseManager().isIzquierdo()) {
-                System.out.println("hola");
                 isThrown = true;
                 vo = this.getX() + 50;
                 xo = this.getX();
@@ -154,8 +151,6 @@ public class Player extends Item {
               System.out.println(t);
               this.cookieAnimation.tick();
         }
-
-  
     }
 
     @Override
