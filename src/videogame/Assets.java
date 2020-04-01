@@ -1,7 +1,7 @@
 /*
  * Mariana Martínez Celis A01194953
  * Diego Gomez Cota A00824758
- * Tarea Animaciones
+ * Tarea Animaciones..
  */
 package videogame;
 
