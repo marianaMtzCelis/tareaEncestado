@@ -145,11 +145,13 @@ public class Player extends Item {
                 //System.out.println(vo);
             } 
         } else {
-              setX(xo + (int)(vo*0.5253*t));
-              setY(yo - ((int)((vo*0.851*t) - (4.91*t*t))));
-              t = (new Date().getTime() - time.getTime()) / 1000.0 ;
-              System.out.println(t);
-              this.cookieAnimation.tick();
+            for (int i = 0; i <= 20; ++i){
+                setX(xo + (int)(vo*0.5253*t));
+                setY(yo - ((int)((vo*0.851*t) - (4.91*t*t))));
+                t = (new Date().getTime() - time.getTime()) / 1000.0 ;
+                //System.out.println(t);
+                this.cookieAnimation.tick();
+            }
         }
     }
 

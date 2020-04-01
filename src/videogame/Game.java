@@ -173,7 +173,11 @@ public class Game implements Runnable {
                 mouseManager.setIzquierdo(true);
                 //player_cookie.setT(new Date().getTime() - player_cookie.getTime().getTime() / 1000.0);
                 player_cookie.setTime(new Date());
-            } else if (player_cookie.isIsThrown() && (player_cookie.getX() > getWidth() || player_cookie.getY() <= -10 || player_cookie.getY() >= this.getHeight())) {
+            } 
+            if (player_cookie.isIsThrown() && (player_cookie.getX() > getWidth() || player_cookie.getY() <= 0 || player_cookie.getY() >= this.getHeight())) {
+                if (player_cookie.getX() > getWidth()) System.out.println("x > width");
+                if (player_cookie.getY() <= -10) System.out.println("y <= -10");
+                if (player_cookie.getY() >= this.getHeight()) System.out.println("y > height");
                 if (falladas < 2) {
                     falladas++;
                 } else if (falladas == 2) {
