@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 /**
  * RUBRICA 20 FALTA Documentacion n shit 10 YA Sonidos 10 IDK Creatividad 10 YA
- * Aniamciones 40 FALTA Tiro Parabolico 5 YA Score 5 YA Vidas
+ * Aniamciones 40 FALTA Tiro Parabolico 5 YA Score 5 YA Vidas.
  */
 /**
  *
@@ -107,7 +107,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        target_monster = new Target(getWidth() - 250, getHeight() / 2 - 100, 200, 200, this);
+        target_monster = new Target(getWidth() - 250, getHeight() / 2 - 50, 200, 200, this);
         player_cookie = new Player(10, getHeight() / 2, 1, 100, 100, this);
         display.getJframe().addKeyListener(keyManager);
 
@@ -196,14 +196,17 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
             g.drawImage(Assets.rectangle,0,0,175,height,null);
+            //g.drawImage(Assets.logo, 250, 10, 445,168, null);
+            g.drawImage(Assets.scoreBoard,40,80,100,77,null);
             target_monster.render(g);
-            player_cookie.render(g);
 
             // displays vidas and score
-            g.setColor(Color.white);
-            g.drawString("Falladas: " + falladas, 80, 80);
-            g.drawString("Vidas:" + vidas, 80, 100);
-            g.drawString("Score: " + score, 80, 120);
+            g.setColor(Color.black);
+            g.drawString("Falladas: " + falladas, 60, 100);
+            g.drawString("Vidas:" + vidas, 60, 120);
+            g.drawString("Score: " + score, 60, 140);
+            
+            player_cookie.render(g);
 
             // Displays game over if vidas reaches to 0
             if (vidas <= 0) {

@@ -23,6 +23,8 @@ public class Assets {
     public static SoundClip bite;  // when the player scores
     public static SoundClip missed; // when the player misses the shot
     public static BufferedImage rectangle; // mouse dragging part rectangle
+    public static BufferedImage logo; // sesame street logo
+    public static BufferedImage scoreBoard; // to save the score board
 
     /**
      * initializing the images of the game
@@ -39,6 +41,8 @@ public class Assets {
         bite = new SoundClip("/sounds/bite.wav");
         missed = new SoundClip("/sounds/missed.wav");
         rectangle = ImageLoader.loadImage("/images/rectangle.jpg");
+        logo = ImageLoader.loadImage("/images/logo.png");
+        scoreBoard = ImageLoader.loadImage("/images/yellowSquare.png");
         
         // Create the arrays of Images
         rotatingCookie = new BufferedImage[5];
