@@ -167,7 +167,10 @@ public class Game implements Runnable {
                 }
                 Assets.bite.play();
                 player_cookie.setX(10);
-            } else if (player_cookie.getX() > getWidth() - 250) {
+                player_cookie.setIsThrown(false);
+                mouseManager.setIzquierdo(true);
+                
+            } else if (player_cookie.getX() > getWidth() - 250 || player_cookie.getY() <= 0 - 100 || player_cookie.getY() >= this.getHeight() - 100) {
                 if (falladas < 2) {
                     falladas++;
                 } else if (falladas == 2) {
@@ -176,6 +179,8 @@ public class Game implements Runnable {
                 }
                 Assets.missed.play();
                 player_cookie.setX(10);
+                player_cookie.setIsThrown(false);
+                mouseManager.setIzquierdo(true);
             }
 
         }

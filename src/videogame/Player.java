@@ -6,6 +6,7 @@
 package videogame;
 
 import java.awt.Graphics;
+import java.util.Date;
 
 /**
  *
@@ -16,12 +17,19 @@ public class Player extends Item {
     private int direction;
     private Game game;
     private Animation cookieAnimation; // stores the animation of player going up
+    private int vo, yo;
+    private boolean isThrown;
+    private double t;
+    private final static Date time = new Date();
 
 
     public Player(int x, int y, int direction, int width, int height, Game game) {
         super(x, y, width, height);
         this.direction = direction;
         this.game = game;
+        vo = 0;
+        t = new Date().getTime() - time.getTime() / 1000.0;
+        isThrown = false;
 
         // creates the animations
         this.cookieAnimation = new Animation(Assets.rotatingCookie, 100);
@@ -82,52 +90,55 @@ public class Player extends Item {
     }
 
     public void setX(int x){
-        if (x <= 100 && x >= 0){
+        if (x <= 100 && x >= 0 && !isThrown){
+            this.x = x;
+        } else {
             this.x = x;
         }
     }
     
     public void setY(int y){
-        if (y >= 0 && (y+80) <= game.getHeight()){
+        if (y >= 0 && (y+80) <= game.getHeight() && !isThrown){
+            this.y = y;
+        } else {
             this.y = y;
         }
     }
+
+    public void setIsThrown(boolean isThrown) {
+        this.isThrown = isThrown;
+    }
+
+    public boolean isIsThrown() {
+        return isThrown;
+    }
+    
+    
     
     @Override
     public void tick() {
-        
-        
-//        if (game.getMouseManager().isIzquierdo()) {
+       
+        if (!isThrown) {
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
-//        }
-         
-        if (game.getKeyManager().up) {
-            // updating animation
-            this.cookieAnimation.tick();
-            direction = 1;
-            setY(getY() - 1);
-        }
-        
-         if (game.getKeyManager().down) {
-            // updating animation
-            this.cookieAnimation.tick();
-            direction = 3;
-            setY(getY() + 1);
-        }
+           
+            if (!game.getMouseManager().isIzquierdo()) {
+            System.out.println("hola");
+            isThrown = true;
+            vo = this.getX();
+            yo = this.y;
+            //System.out.println(vo);
+            } 
+            
+            
+        } else {
 
-        if (game.getKeyManager().left) {
-            // updating animation
-            this.cookieAnimation.tick();
-            direction = 2;
-            setX(getX() - 1);
-        }
-        
-         if (game.getKeyManager().right) {
-            // updating animation
-            this.cookieAnimation.tick();
-            direction = 4;
-            setX(getX() + 1);
+              setX((int)(vo*0.5253*t));
+              setY((int)(yo + (vo*0.851*t) - (0.5*-9.81*t*t)));
+              t = (new Date().getTime() - time.getTime()) / 1000.0 ;
+              System.out.println(t);
+              
+         
         }
 
   
