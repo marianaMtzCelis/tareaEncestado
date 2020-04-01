@@ -196,7 +196,7 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
             g.drawImage(Assets.rectangle,0,0,175,height,null);
-            //g.drawImage(Assets.logo, 250, 10, 445,168, null);
+            g.drawImage(Assets.logo, 250, 10, 445,168, null);
             g.drawImage(Assets.scoreBoard,40,80,100,77,null);
             target_monster.render(g);
 
