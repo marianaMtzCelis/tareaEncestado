@@ -10,6 +10,9 @@
 # Proyecto #
 #########
 build/
+nbproject/
+build/built-jar.properties
+nbproject/private/private.xml
 
 # Packages #
 ############
