@@ -20,7 +20,7 @@ public class Player extends Item {
     private int vo, yo;
     private boolean isThrown;
     private double t;
-    private final static Date time = new Date();
+    private static Date time = new Date();
 
 
     public Player(int x, int y, int direction, int width, int height, Game game) {
@@ -92,7 +92,7 @@ public class Player extends Item {
     public void setX(int x){
         if (x <= 100 && x >= 0 && !isThrown){
             this.x = x;
-        } else {
+        } else if (isThrown) {
             this.x = x;
         }
     }
@@ -100,7 +100,7 @@ public class Player extends Item {
     public void setY(int y){
         if (y >= 0 && (y+80) <= game.getHeight() && !isThrown){
             this.y = y;
-        } else {
+        } else if (isThrown) {
             this.y = y;
         }
     }
@@ -112,6 +112,23 @@ public class Player extends Item {
     public boolean isIsThrown() {
         return isThrown;
     }
+
+    public void setT(double t) {
+        this.t = t;
+    }
+
+    public double getT() {
+        return t;
+    }
+
+    public static Date getTime() {
+        return time;
+    }
+
+    public static void setTime(Date time) {
+        Player.time = time;
+    }
+    
     
     
     
