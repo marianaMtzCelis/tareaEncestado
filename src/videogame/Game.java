@@ -195,6 +195,7 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
+            g.drawImage(Assets.rectangle,0,0,175,height,null);
             target_monster.render(g);
             player_cookie.render(g);
 

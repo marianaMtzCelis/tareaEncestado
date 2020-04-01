@@ -22,6 +22,7 @@ public class Assets {
     public static BufferedImage gameOver;  // to display if player reaches to 0 lives
     public static SoundClip bite;  // when the player scores
     public static SoundClip missed; // when the player misses the shot
+    public static BufferedImage rectangle; // mouse dragging part rectangle
 
     /**
      * initializing the images of the game
@@ -37,6 +38,7 @@ public class Assets {
         gameOver = ImageLoader.loadImage("/images/gameover.jpg");
         bite = new SoundClip("/sounds/bite.wav");
         missed = new SoundClip("/sounds/missed.wav");
+        rectangle = ImageLoader.loadImage("/images/rectangle.jpg");
         
         // Create the arrays of Images
         rotatingCookie = new BufferedImage[5];
