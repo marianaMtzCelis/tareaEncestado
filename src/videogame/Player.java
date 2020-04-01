@@ -82,8 +82,14 @@ public class Player extends Item {
     }
 
     public void setX(int x){
-        if (x <= 100){
+        if (x <= 100 && x >= 0){
             this.x = x;
+        }
+    }
+    
+    public void setY(int y){
+        if (y >= 0 && (y+80) <= game.getHeight()){
+            this.y = y;
         }
     }
     
