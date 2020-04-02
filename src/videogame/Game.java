@@ -12,10 +12,6 @@ import java.util.Date;
 import java.util.LinkedList;
 
 /**
- * RUBRICA 20 FALTA Documentacion n shit 10 YA Sonidos 10 IDK Creatividad 10 YA
- * Aniamciones 40 FALTA Tiro Parabolico 5 YA Score 5 YA Vidas.
- */
-/**
  *
  * @author antoniomejorado
  */
@@ -98,6 +94,11 @@ public class Game implements Runnable {
         return player_cookie;
     }
 
+    /**
+     * To get the target_monster of the game
+     *
+     * @return target_monster
+     */
     public Target getTarget() {
         return target_monster;
     }
@@ -106,21 +107,22 @@ public class Game implements Runnable {
      * initializing the display window of the game
      */
     private void init() {
+        // declaring display
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
+        // initializing player and target
         target_monster = new Target(getWidth() - 250, getHeight() / 2 - 50, 200, 200, this);
         player_cookie = new Player(10, getHeight() / 2, 1, 50, 50, this);
+        //adding elements to display
         display.getJframe().addKeyListener(keyManager);
-
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-
+        // setting initial values
         this.score = 0;
         this.vidas = 5;
         this.falladas = 0;
-
     }
 
     @Override
@@ -155,41 +157,41 @@ public class Game implements Runnable {
     }
 
     private void tick() {
-
+        // check if player is still alive
         if (vidas > 0) {
+            // tick all elements
             keyManager.tick();
             player_cookie.tick();
             target_monster.tick();
-
+            // if scored
             if (player_cookie.colision(target_monster)) {
                 score += 10;
                 if (score % 50 == 0) {
                     vidas++;
                 }
                 Assets.bite.play();
+                // reset cookie
                 player_cookie.setX(10);
                 player_cookie.setY(getHeight()/2);
                 player_cookie.setIsThrown(false);
                 mouseManager.setIzquierdo(true);
-                //player_cookie.setT(new Date().getTime() - player_cookie.getTime().getTime() / 1000.0);
                 player_cookie.setTime(new Date());
             } 
+            // if missed
             if (player_cookie.isIsThrown() && (player_cookie.getX() > getWidth() || player_cookie.getY() <= 0 || player_cookie.getY() >= this.getHeight())) {
-                if (player_cookie.getX() > getWidth()) System.out.println("x > width");
-                if (player_cookie.getY() <= -10) System.out.println("y <= -10");
-                if (player_cookie.getY() >= this.getHeight()) System.out.println("y > height");
+                // update variables
                 if (falladas < 2) {
                     falladas++;
                 } else if (falladas == 2) {
                     vidas--;
                     falladas = 0;
                 }
+                // reset cookie
                 Assets.missed.play();
                 player_cookie.setX(10);
                 player_cookie.setY(height/2);
                 player_cookie.setIsThrown(false);
                 mouseManager.setIzquierdo(true);
-                //player_cookie.setT(new Date().getTime() - player_cookie.getTime().getTime() / 1000.0);
                 player_cookie.setTime(new Date());
             }
 
@@ -235,7 +237,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * setting the thead for the game
+     * setting the thread for the game
      */
     public synchronized void start() {
         if (!running) {
